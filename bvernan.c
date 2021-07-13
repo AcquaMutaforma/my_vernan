@@ -10,6 +10,16 @@ int main(){
     3 il file di input viene preso a blocchi di key-byte e mandati al metodo di crypt
     4 quello restituito dal metodo di crypt viene mandato in output
     */
+   char* key;
+   int keylength;
+   char* input;
+   int inputlength;
+   char* output;
+   int nblocchi;
+
+   nblocchi = (inputlength/keylength)+1;
+   
+   
 
 }
 
