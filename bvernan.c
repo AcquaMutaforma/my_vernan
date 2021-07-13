@@ -1,5 +1,5 @@
 #include <stdio.h>
-//#include "mycrypt.h"
+#include "mycrypt.h"
 //#include libreria dei files
 
 int main(){
