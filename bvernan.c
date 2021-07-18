@@ -29,7 +29,7 @@ void main(int argc, char* k, char* i, char* o){
     int nblocchi;
 
     /* Controllo input */
-    if(argc < 3){
+    if(argc < 4){
         printf("\n[0] Argomenti inseriti sono meno di 3!\n");
         exit(0);
     }
