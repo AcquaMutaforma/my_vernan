@@ -5,6 +5,10 @@
 #include <string.h>
 #include "mycrypt.h"
 
+int CalcolaLunghezza(FILE*);
+char* LeggiFile(FILE*, int);
+void ChiudiTuttiFiles(FILE *, FILE * , FILE *);
+
 void main(int argc, char* k, char* i, char* o){
     /*
     1 verificare file chiave, file da criptare e file output se esiste, per l'output in caso si crea (qua potrebbe essere carino 
@@ -29,15 +33,15 @@ void main(int argc, char* k, char* i, char* o){
         printf("\n[0] Argomenti inseriti sono meno di 3!\n");
         exit(0);
     }
-    if(fpkey = fopen(k, "r") == NULL){
+    if((fpkey = fopen(k, "r")) == NULL){
         printf("\n[1] Errore Apertura Key File!\n");
         exit(0);
     }
-    if(fpinput = fopen(i,"r") == NULL){
+    if((fpinput = fopen(i,"r")) == NULL){
         printf("\n[1] Errore Apertura Input File!\n");
         exit(0);
     }
-    fpoutput = fopen(o, O_TRUNC|O_CREAT);
+    fpoutput = fopen(o, "w");
 
     /* Misuro la grandezza del file per la Key e lo alloco in memoria */
     keylength = CalcolaLunghezza(fpkey);
@@ -76,11 +80,11 @@ void ChiudiTuttiFiles(FILE * key, FILE * input, FILE * output ){
 }
 
 char* LeggiFile(FILE* f, int lungfile){
-    char* contenuto = calloc(1, lungfile+1);
+    char* contenuto = calloc(lungfile, sizeof(char));
     if(!contenuto){
         return NULL;
     }
-    if( fread(contenuto, lungfile, 1, f =! 1)){
+    if((fread(contenuto, sizeof(char), lungfile, f)) != lungfile){
         return NULL;
     }
     /* alternativa per la lettura
