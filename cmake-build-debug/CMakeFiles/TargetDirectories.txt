@@ -1,0 +1,3 @@
+C:/Users/Aley/Desktop/oslab/cmake-build-debug/CMakeFiles/bvernan.dir
+C:/Users/Aley/Desktop/oslab/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Aley/Desktop/oslab/cmake-build-debug/CMakeFiles/rebuild_cache.dir

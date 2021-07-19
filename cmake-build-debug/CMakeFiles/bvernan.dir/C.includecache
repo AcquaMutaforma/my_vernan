@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/Aley/Desktop/oslab/mycrypt.c
+stdlib.h
+-
+mycrypt.h
+C:/Users/Aley/Desktop/oslab/mycrypt.h
+
+C:/Users/Aley/Desktop/oslab/mycrypt.h
+

@@ -1,18 +1,7 @@
-char* Crypt(char*, long, char*, long);
+//Author: Alessandro Pallotta - 102627
+#ifndef OSLAB_MYCRYPT_H
+#define OSLAB_MYCRYPT_H
 
-char* Crypt(char* key, long keylength, char* input, long inputlength){
-    char* toreturn;
-    toreturn = calloc(inputlength, sizeof(char));
-    int navkey = 0; //navigatore della key, da 0 a keyLength
-    int navblocchi = 0; //contatore dei blocchi creati da N/K
-    for(int i = 0; i < inputlength; i++){
+extern char* Crypt(char*, long, char*, long);
 
-        toreturn[i] = input[i] ^ key[((i+navblocchi)%keylength)];
-
-        if(navkey == keylength){
-            navkey = 0;
-            navblocchi++;
-        }else navkey++;
-    }
-    return toreturn;
-}
+#endif //OSLAB_MYCRYPT_H

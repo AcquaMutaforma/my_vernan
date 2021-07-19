@@ -1,15 +1,13 @@
+//Author: Alessandro Pallotta - 102627
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <string.h>
 #include "mycrypt.h"
 
 int CalcolaLunghezza(FILE*);
 char* LeggiFile(FILE*, int);
 void ChiudiTuttiFiles(FILE *, FILE * , FILE *);
 
-void main(int argc, char* k, char* i, char* o){
+int main(int argc, char* args[]){
     /*
     1 verificare file chiave, file da criptare e file output se esiste, per l'output in caso si crea (qua potrebbe essere carino 
      chiedere se salvare un'altro nuovo oppure sovrascrivere)
@@ -26,22 +24,21 @@ void main(int argc, char* k, char* i, char* o){
     char* input;
 
     FILE * fpoutput;
-    int nblocchi;
 
     /* Controllo input */
     if(argc < 4){
         printf("\n[0] Argomenti inseriti sono meno di 3!\n");
         exit(0);
     }
-    if((fpkey = fopen(k, "r")) == NULL){
+    if((fpkey = fopen(args[1], "r")) == NULL){
         printf("\n[1] Errore Apertura Key File!\n");
         exit(0);
     }
-    if((fpinput = fopen(i,"r")) == NULL){
+    if((fpinput = fopen(args[2],"r")) == NULL){
         printf("\n[1] Errore Apertura Input File!\n");
         exit(0);
     }
-    fpoutput = fopen(o, "w");
+    fpoutput = fopen(args[3], "w");
 
     /* Misuro la grandezza del file per la Key e lo alloco in memoria */
     keylength = CalcolaLunghezza(fpkey);
@@ -59,7 +56,19 @@ void main(int argc, char* k, char* i, char* o){
         free(input);
         exit(1);
     }
-    
+
+    /* to delete
+    printf("\nkey length : %ld",keylength);
+    printf("\nkey : ");
+    for(int i = 0; i < keylength; i++){
+        printf("%c",key[i]);
+    }
+    printf("\ninput length : %ld",inputlength);
+    printf("\ninput : ");
+    for(int i = 0; i < inputlength; i++){
+        printf("%c",input[i]);
+    } */
+
     /* Utilizzo la funzione Crypt per criptare o decriptare il file in input con la key 
     allo stesso tempo scrivo il risultato con fputs nel file di output */
     int risultato = fputs( Crypt(key, keylength, input, inputlength), fpoutput);
@@ -71,6 +80,7 @@ void main(int argc, char* k, char* i, char* o){
     ChiudiTuttiFiles(fpkey, fpinput, fpoutput);
     free(key);
     free(input);
+    return 0;
 }
 
 void ChiudiTuttiFiles(FILE * key, FILE * input, FILE * output ){
@@ -87,12 +97,6 @@ char* LeggiFile(FILE* f, int lungfile){
     if((fread(contenuto, sizeof(char), lungfile, f)) != lungfile){
         return NULL;
     }
-    /* alternativa per la lettura
-    while((ch = fgetc(fpinput)) != EOF){
-      *(input+*i) = ch;
-      i++;
-    }
-    */
     return contenuto;
 }
 
